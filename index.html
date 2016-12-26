@@ -2,18 +2,6 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-        <style>
-           .overlay {
-                background: #e9e9e9;  
-                display: none;        
-                position: absolute;   
-                top: 0;                  
-                right: 0;            
-                bottom: 0;
-                left: 0;
-                opacity: 0.5;
-            }
-        </style>
         <script>
             function processCode(event)
             {
@@ -36,14 +24,12 @@
                     case "mor":
                     {
                         $("#code")[0].value = "";
-                        var player = $('#player1')[0]; // document.getElementById('player1');
-                        var source = $('#mp4Source')[0]; // document.getElementById('mp4Source');
+                        var player = $('#player1')[0];
+                        var source = $('#mp4Source')[0];
                         player.focus();
-                        $(".overlay").show();
                         player.pause();
                         source.src = "videos/" + videoSrc + ".mp4";
                         player.load();
-                        $(".overlay").hide();
                         
                         player.play();
                         break;
