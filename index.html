@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <style>
+           .overlay {
+                background: #e9e9e9;  
+                display: none;        
+                position: absolute;   
+                top: 0;                  
+                right: 0;            
+                bottom: 0;
+                left: 0;
+                opacity: 0.5;
+            }
+        </style>
+        <script>
+            function processCode(event)
+            {
+                if (event.keyCode == 13)
+                {
+                    changeSource(getCode());
+                }
+            }
+
+            function changeSource (videoSrc)
+            {
+                videoSrc = videoSrc.toLowerCase();
+                switch (videoSrc)
+                {
+                    case "m15510n":
+                    case "4":
+                    case "gabe":
+                    case "s0lv3d":
+                    case "19": 
+                    case "mor":
+                    {
+                        $("#code")[0].value = "";
+                        var player = $('#player1')[0]; // document.getElementById('player1');
+                        var source = $('#mp4Source')[0]; // document.getElementById('mp4Source');
+                        player.focus();
+                        $(".overlay").show();
+                        var url = "videos/" + videoSrc + ".mp4";
+                        player.pause();
+                        source.src = "videos/" + videoSrc + ".mp4";
+                        player.load();
+                        $(".overlay").hide();
+                        
+                        player.play();
+                        break;
+                    }
+                    default: alert("Invalid code, please try again...");
+                }
+            }
+
+            function getCode()
+            {   
+                return $("#code").val();
+            }
+        </script>
+    </head>
+    <body style="background: white;">
+        <div class="overlay">
+            <div id="loading-img"></div>
+        </div>
+        <table style="width: 100%">
+            <tr><td style="text-align: center;">
+                <video style="border: 100px; border-color: black;" width="640" height="480" type="video/mp4" 
+                    id="player1" controls="controls" preload="none">
+                    <source id='mp4Source' src="videos/introduction.mp4" type="video/mp4" />    
+                </video>
+                <p>
+                    <label style="color: black; font-size: 16pt;">Enter the secret code below and hit return to see your next clue</label>
+                    <br />
+                    <input style="width: 590; height: 30; font-size: 16pt; font-weight: bold;" id="code" type="text" onkeypress="return processCode(event)"/>
+                </p>
+            </td></tr>
+        </table>
+        <script>
+            var player = $('#player1')[0];
+            player.load();
+            player.play();   
+        </script>  
+    </body>
+</html>
